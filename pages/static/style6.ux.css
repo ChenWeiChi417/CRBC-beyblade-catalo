@@ -1,0 +1,315 @@
+/* ========================================= */
+/* 1. 全域設定 (Global) - 設定網頁整體的基礎樣式 */
+/* ========================================= */
+body {
+    margin: 0;          /* 清除瀏覽器預設的邊距 (上下左右留白)，讓網頁貼齊視窗邊緣 */
+    padding: 0;         /* 清除瀏覽器預設的內距 */
+    font-family: "Microsoft JhengHei", Arial, sans-serif; /* 設定字體：優先使用微軟正黑體，若無則用 Arial */
+    background-color: #ffffff; /* 設定網頁背景顏色為純白色 */
+    position: relative; /* 設定相對定位，作為子元素定位的參考基準 */
+    overflow-x: hidden; /* 隱藏水平捲軸：防止因為裝飾或人物在進場動畫時超出畫面，導致下方出現捲軸 */
+}
+
+/* ========================================= */
+/* 2. Header 與 Logo - 設定頂部區域 */
+/* ========================================= */
+header {
+    width: 100%;        /* 設定寬度佔滿整個螢幕 */
+    padding: 30px 0;    /* 設定內距：上下各留 30px，左右不留 */
+    display: flex;      /* 使用 Flexbox 排版，方便內容置中 */
+    justify-content: center; /* 水平置中：讓 Logo 圖片在畫面正中間 */
+    align-items: center;     /* 垂直置中：讓 Logo 在 Header 區塊內垂直居中 */
+    position: relative; /* 設定相對定位，為了設定 z-index */
+    z-index: 10;        /* 設定層級為 10，確保 Logo 顯示在背景裝飾之上 */
+}
+
+.logo {
+    max-width: 500px;   /* 限制 Logo 的最大寬度為 500px，避免圖片過大 */
+    width: 60%;         /* 設定圖片寬度為父容器的 60%，實現響應式縮放 */
+    height: auto;       /* 高度設為自動，保持圖片原始長寬比例不變形 */
+    animation: zoomInFade 1s ease-out; /* 套用 zoomInFade 動畫，持續 1 秒，採緩出效果 */
+}
+
+/* ========================================= */
+/* 3. 導航按鈕 (Navigation) - 左上角回首頁按鈕 */
+/* ========================================= */
+.home-btn {
+    position: fixed;    /* 設定固定定位：捲動網頁時，按鈕一直停留在左上角 */
+    top: 0;             /* 貼齊視窗頂部 */
+    left: 5%;           /* 距離視窗左邊 5% 的位置 (稍微留點空隙) */
+    width: 80px;        /* 設定按鈕寬度為 80px */
+    height: 80px;       /* 設定按鈕高度為 80px */
+    background-color: #E68A2E; /* 設定背景顏色為 UX 系列的橘色 */
+    
+    /* 【關鍵技術】使用 clip-path 裁切出「倒三角形」 */
+    /* polygon 座標順序：(左上 0 0), (右上 100% 0), (下中 50% 100%) */
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    
+    display: flex;      /* 使用 Flexbox 排版 */
+    justify-content: center; /* 讓裡面的房子圖示水平置中 */
+    padding-top: 12px;  /* 設定上方內距 12px，把圖示往下推一點，讓它在三角形內視覺居中 */
+    z-index: 100;       /* 設定極高的層級 (100)，確保按鈕永遠在最上層可點擊 */
+    text-decoration: none; /* 去除超連結預設的底線 */
+    
+    transition: transform 0.3s ease; /* 設定過渡效果：當變形 (如 hover) 發生時，花 0.3 秒平滑轉換 */
+    animation: dropDown 1s ease-out; /* 套用掉落動畫：讓按鈕一開始從上面掉下來 */
+}
+
+/* 當滑鼠移到按鈕上時的效果 */
+.home-btn:hover {
+    transform: scale(1.1); /* 按鈕放大 1.1 倍，增加互動感 */
+}
+
+/* 房子圖示圖片設定 */
+.home-icon-img {
+    width: 35px;        /* 設定圖示寬度 35px */
+    height: 35px;       /* 設定圖示高度 35px */
+    display: block;     /* 消除圖片下方的預設空隙 */
+}
+
+/* ========================================= */
+/* 4. 背景裝飾 (Decorations) - 左右兩側的視覺元素 */
+/* ========================================= */
+
+/* 左側長方形裝飾 */
+.left-sidebar {
+    position: fixed;    /* 固定定位：捲動網頁時，這條線不會動 */
+    top: 0;             /* 貼齊頂部 */
+    left: 0;            /* 貼齊左邊 */
+    width: 15%;         /* 寬度佔螢幕的 15% */
+    height: 100%;       /* 高度佔滿螢幕 */
+    background-color: #E68A2E; /* 顏色：UX 橘色 */
+    z-index: 0;         /* 層級設為 0，放在最底層背景 */
+    
+    /* 進場動畫設定 */
+    transform: translateX(-100%); /* 初始位置：往左移 100% (藏在畫面外) */
+    animation: slideInFromLeft 1s ease-out forwards; /* 播放左滑入動畫，forwards 代表停在結束位置 */
+}
+
+/* 右側垂直線條容器 (包含三條線) */
+.right-decoration {
+    position: fixed;    /* 固定定位 */
+    top: 0;             /* 貼齊頂部 */
+    right: 0;           /* 貼齊右邊 */
+    height: 100%;       /* 高度佔滿 */
+    width: 15%;         /* 寬度佔螢幕 15% */
+    display: flex;      /* 使用 Flexbox 讓內部的三條線並排 */
+    z-index: 0;         /* 層級設為 0 */
+    
+    /* 進場動畫設定 */
+    transform: translateX(100%); /* 初始位置：往右移 100% (藏在畫面外) */
+    animation: slideInFromRight 1s ease-out forwards; /* 播放右滑入動畫 */
+}
+
+/* 線條共通設定 */
+.r-stripe { 
+    height: 100%;       /* 高度佔滿容器 */
+}
+/* 橘色線設定 */
+.r-orange { 
+    background-color: #E68A2E; /* 顏色：UX 橘色 */
+    width: 30px;        /* 寬度固定 30px */
+}
+/* 黑色線設定 */
+.r-black { 
+    background-color: #000;    /* 顏色：黑色 */
+    width: 30px;        /* 寬度固定 30px */
+}
+
+/* ========================================= */
+/* 5. 中間內容區 (Content Area) - 放置商品列表 */
+/* ========================================= */
+
+/* 內容容器限制 */
+.content-area {
+    margin-left: 20%;   /* 左邊空出 20%，避開左側裝飾 */
+    margin-right: 20%;  /* 右邊空出 20%，避開右側裝飾 */
+    position: relative; /* 相對定位，作為內部元素的參考點 */
+    z-index: 10;        /* 層級 10，確保內容在背景裝飾之上 */
+    padding: 20px;      /* 內部留白 20px */
+}
+
+/* 商品列表容器 (垂直排列) */
+.product-grid {
+    display: flex;      /* 使用 Flexbox 排版 */
+    flex-direction: column; /* 設定方向為垂直 (Column)，讓商品由上往下排 */
+    align-items: center;    /* 設定水平置中，讓所有商品卡片都在中間 */
+    gap: 60px;          /* 設定每個商品之間的間距為 60px */
+    margin-top: 50px;   /* 設定上方與 Header 的距離 */
+}
+
+/* 商品卡片 (包含圖片與標題) */
+.product-card {
+    text-align: center; /* 文字置中 */
+    display: flex;      /* 使用 Flexbox */
+    flex-direction: column; /* 垂直排列圖片與標題 */
+    align-items: center; /* 水平置中 */
+    width: 100%;        /* 寬度佔滿容器 */
+}
+
+/* 商品圖片 (預設隱藏) */
+.prod-img {
+    width: 100%;        /* 寬度佔滿 */
+    height: 0;          /* 【關鍵】初始高度設為 0，讓它不佔空間 */
+    opacity: 0;         /* 初始透明度為 0 (完全透明) */
+    margin-bottom: 0;   /* 初始下邊距為 0 */
+    overflow: hidden;   /* 內容超出隱藏，防止圖片露出來 */
+    
+    object-fit: contain; /* 圖片縮放模式：保持比例完整顯示在框框內 */
+    object-position: center; /* 圖片置中 */
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2)); /* 使用濾鏡陰影，貼合圖片邊緣 */
+    
+    position: relative; /* 相對定位 */
+    z-index: 10;        /* 層級 10 */
+    
+    /* 設定過渡動畫：當高度、透明度、間距改變時，花 0.5 秒平滑切換 */
+    transition: all 0.5s ease;
+    cursor: pointer;    /* 滑鼠移上去變成手指形狀 */
+}
+
+/* 當滑鼠移到卡片上時，圖片展開顯現 (Hover) */
+.product-card:hover .prod-img {
+    height: 250px;       /* 恢復高度為 250px，把標題往下推 */
+    opacity: 1;          /* 變回不透明 (顯示) */
+    margin-bottom: 20px; /* 增加下邊距 20px，與標題保持距離 */
+    
+    transform: scale(1.1); /* 圖片稍微放大 1.1 倍 */
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4)); /* 陰影加深，製造浮起感 */
+    z-index: 100;        /* 層級拉高，確保蓋住其他東西 */
+}
+
+/* 平行四邊形標題外框 */
+.prod-title {
+    background-color: #E68A2E; /* 背景色：UX 橘色 */
+    display: inline-block;     /* 行內區塊，大小包覆內容 */
+    padding: 10px 40px;        /* 內距：上下 10px，左右 40px */
+    width: 80%;                /* 寬度佔卡片的 80% */
+    
+    transform: skewX(-20deg);  /* X 軸傾斜 -20 度，製作平行四邊形 */
+    box-shadow: 5px 5px 0px rgba(0,0,0,0.1); /* 右下角實心陰影 */
+    
+    /* 【關鍵】加入 transition，讓 hover 放大時有平滑過渡效果 */
+    transition: transform 0.3s ease;
+}
+
+/* 當滑鼠移到卡片上時，標題也稍微放大 */
+.product-card:hover .prod-title {
+    transform: skewX(-20deg) scale(1.05); /* 保持傾斜，並放大 1.05 倍 */
+}
+
+/* 【特殊效果】針對「敬請期待」格 (沒有圖片) 的特效 */
+/* 當滑鼠移到有 .coming-soon 的卡片上時，改變標題樣式 */
+.product-card.coming-soon:hover .prod-title {
+    /* 放大 1.1 倍，並往上浮起 10px */
+    transform: skewX(-20deg) scale(1.1) translateY(-10px);
+    /* 陰影加深，製造懸浮感 */
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
+    /* 背景色變亮，增加互動回饋 */
+    background-color: #ff9f43; 
+}
+
+/* 標題內的文字 */
+.prod-title span {
+    display: block;     /* 區塊顯示 */
+    transform: skewX(20deg); /* 反向傾斜 20 度，把文字轉正 */
+    color: #fff;        /* 文字顏色：白色 */
+    font-size: 1.5rem;  /* 字體大小 */
+    font-weight: bold;  /* 粗體 */
+    font-style: italic; /* 斜體 */
+}
+
+/* ========================================= */
+/* 6. UX 系列標示格 (標題格) 專用樣式 */
+/* ========================================= */
+.series-label-card {
+    display: flex;      /* 使用 Flexbox */
+    justify-content: center; /* 水平置中 */
+    align-items: center;     /* 垂直置中 */
+    height: 100%;       /* 高度佔滿 */
+}
+
+/* 標示文字樣式 */
+.series-label-text {
+    font-size: 3rem;    /* 字體超大 */
+    font-weight: 900;   /* 字體極粗 */
+    color: #E68A2E;     /* 文字顏色：橘色 */
+    border: 5px solid #E68A2E; /* 邊框：5px 實線橘色 */
+    font-style: italic; /* 斜體 */
+    padding: 20px;      /* 內距 20px */
+    transform: skewX(-10deg); /* 稍微傾斜 -10 度 */
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.1); /* 陰影 */
+}
+
+/* ========================================= */
+/* 7. 人物設定 (Characters) - 右側裝飾人物 */
+/* ========================================= */
+
+/* 人物容器 */
+.char-scroll {
+    position: absolute; /* 絕對定位：相對於 body (整頁) */
+    right: 0;           /* 貼齊右邊 */
+    z-index: 5;         /* 層級 5，在背景之上 */
+    
+    /* 初始狀態：往右平移 100% (藏在畫面外) */
+    transform: translateX(100%);
+    opacity: 0;         /* 透明 */
+    transition: opacity 0.5s ease-out; /* 過渡效果 */
+}
+
+/* 當人物滑入顯示時的狀態 (.active 由 JS 加入) */
+.char-scroll.active {
+    opacity: 1;         /* 顯示 */
+    animation: slideInFromRight 1s ease-out forwards; /* 執行滑入動畫 */
+}
+
+/* 人物圖片本身 */
+.char-scroll img {
+    max-width: 300px;   /* 限制最大寬度 */
+    width: 20vw;        /* 寬度設為螢幕的 20% */
+    height: auto;       /* 高度自動 */
+    display: block;     /* 消除空隙 */
+}
+
+/* 人物垂直分佈位置設定 */
+.char-top { top: 15%; } /* 上方人物：距離頂部 15% */
+.char-mid { top: 45%; } /* 中間人物：距離頂部 45% */
+.char-bot { top: 80%; } /* 下方人物：距離頂部 80% */
+
+/* ========================================= */
+/* 8. 動畫定義 (Keyframes) - 動畫劇本 */
+/* ========================================= */
+
+/* 卡片淡入特效類別 */
+.scroll-fade {
+    opacity: 0;         /* 初始透明 */
+    transform: translateY(50px); /* 初始位置：下沉 50px */
+    transition: all 0.8s ease-out; /* 過渡時間 0.8 秒 */
+}
+
+/* 卡片顯示狀態 */
+.scroll-fade.active {
+    opacity: 1;         /* 顯示 */
+    transform: translateY(0);    /* 回到原位 */
+}
+
+/* Logo 放大淡入動畫 */
+@keyframes zoomInFade {
+    0% { transform: scale(0.8) translateY(-30px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* 左側滑入動畫 */
+@keyframes slideInFromLeft {
+    to { transform: translateX(0); } /* 結束時回到原點 */
+}
+
+/* 右側滑入動畫 */
+@keyframes slideInFromRight {
+    to { transform: translateX(0); } /* 結束時回到原點 */
+}
+
+/* 按鈕從天而降動畫 */
+@keyframes dropDown {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(0); }
+}

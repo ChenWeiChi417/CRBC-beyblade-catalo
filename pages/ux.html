@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX系列商品一覽 - Beyblade X</title>
+    
+    <link rel="stylesheet" href="../static/style6.ux.css">
+</head>
+<body>
+    <header>
+        <img src="../static/logo.png" alt="戰鬥陀螺 X Logo" class="logo">
+    </header>
+
+    <div class="content-area">
+        
+        <div class="product-grid">
+
+            <div class="product-card series-label-card scroll-fade">
+                <div class="series-label-text">
+                    UX<br>SERIES
+                </div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/ux/ux01.png" alt="UX-01" class="prod-img">
+                <div class="prod-title"><span>UX-01 蒼龍爆刃</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/ux/ux02.png" alt="UX-02" class="prod-img">
+                <div class="prod-title"><span>UX-02 惡魔戰錘</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/ux/ux03.png" alt="UX-03" class="prod-img">
+                <div class="prod-title"><span>UX-03 魔導神杖</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/ux/ux04.png" alt="UX-04" class="prod-img">
+                <div class="prod-title"><span>UX-04 極限衝擊對戰組</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/ux/ux05.png" alt="UX-05" class="prod-img">
+                <div class="prod-title"><span>UX-05 忍者闇影隨機強化組</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/ux/ux06.png" alt="UX-06" class="prod-img">
+                <div class="prod-title"><span>UX-06 雄獅巔峰</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/ux/ux07.png" alt="UX-07" class="prod-img">
+                <div class="prod-title"><span>UX-07 鳳凰尾翼改造組</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/ux/ux08.png" alt="UX-08" class="prod-img">
+                <div class="prod-title"><span>UX-08 霜輝銀狼</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/ux/ux09.png" alt="UX-09" class="prod-img">
+                <div class="prod-title"><span>UX-09 武士星劍豪華組</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/ux/ux10.png" alt="UX-10" class="prod-img">
+                <div class="prod-title"><span>UX-10 騎士圓甲改造組</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/ux/ux11.png" alt="UX-11" class="prod-img">
+                <div class="prod-title"><span>UX-11 衝擊龍神豪華組</span></div>
+            </div>
+            <div class="product-card scroll-fade">
+                <div class="prod-title"><span>敬請期待</span></div>
+            </div>
+
+        </div>
+        
+        <div style="height: 200px;"></div>
+
+    </div>
+
+    <div class="char-scroll char-top">
+        <img src="../static/x.png" alt="Top Character">
+    </div>
+
+    <div class="char-scroll char-mid">
+        <img src="../static/Bird.png" alt="Mid Character">
+    </div>
+
+    <div class="char-scroll char-bot">
+        <img src="../static/Multi.png" alt="Bot Character">
+    </div>
+
+    <div class="left-sidebar"></div>
+
+    <div class="right-decoration">
+        <div class="r-stripe r-orange"></div>
+        <div class="r-stripe r-black"></div>
+        <div class="r-stripe r-orange"></div>
+    </div>
+
+    <a href="/" class="home-btn">
+        <img src="../static/HOME.png" alt="回首頁" class="home-icon-img">
+    </a>
+
+<!-- ========================================= -->
+    <!-- 5. 滾動偵測腳本 (Scroll Trigger Script) -->
+    <!-- ========================================= */ -->
+    <script>
+        // 1. 建立一個「交叉觀察器 (IntersectionObserver)」
+        // 這是一個負責監控「元素是否進入視窗」的機器人
+        const observer = new IntersectionObserver((entries) => {
+            
+            // 遍歷每一個被觀察的目標 (可能是人物，也可能是商品卡片)
+            entries.forEach(entry => {
+                
+                // 檢查：如果該目標「正在交叉 (isIntersecting)」(也就是進入畫面範圍了)
+                if (entry.isIntersecting) {
+                    
+                    // 動作：幫該元素加上 "active" 這個 class
+                    // (加上 class 後，CSS 寫好的 transition/animation 就會開始執行)
+                    entry.target.classList.add('active');
+                    
+                    // 優化效能：既然動畫已經觸發了，就叫觀察員「停止觀察」這個元素
+                    // 這樣可以避免往回捲動時動畫重複閃爍，也能節省瀏覽器資源
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, {
+            // --- 觀察器的設定選項 ---
+            
+            // 觸發門檻 (Threshold)：0.01 代表只要目標露出 1% 的面積，就算「看到了」
+            threshold: 0.01,
+            
+            // 視窗邊界擴充 (Root Margin)：順序是「上、右、下、左」
+            // "0px 50% 10% 0px" 的意思是：
+            // 1. 往右邊多看 50% 的寬度 (這是為了抓到那些藏在右邊畫面外的人物)
+            // 2. 往下面多看 10% 的高度 (讓商品在還沒完全捲上來時，就提早一點點開始浮現，感覺更流暢)
+            rootMargin: "0px 50% 10% 0px"
+        });
+
+        // 2. 選取並觀察「人物」
+        // 抓取所有 class 有 'char-scroll' 的元素 (X, Bird, Multi)
+        const characters = document.querySelectorAll('.char-scroll');
+        // 對每一個抓到的人物，叫觀察員開始盯著它
+        characters.forEach(char => {
+            observer.observe(char);
+        });
+        
+        // 3. 選取並觀察「商品卡片」
+        // 抓取所有 class 有 'scroll-fade' 的元素 (BX/UX/CX 商品格)
+        const products = document.querySelectorAll('.scroll-fade');
+        // 對每一個抓到的商品，叫觀察員開始盯著它
+        products.forEach(prod => {
+            observer.observe(prod);
+        });
+    </script>
+</body>
+</html>

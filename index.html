@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRBC 戰鬥陀螺 X 商品圖鑑總覽</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .logo { max-width: 280px; margin-bottom: 10px; }
+        h1 { letter-spacing: 3px; margin: 10px 0 5px 0; color: #f0f0f0; }
+        p { color: #888; margin-bottom: 40px; }
+        .nav-cards {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .series-btn {
+            text-decoration: none;
+            color: white;
+            width: 220px;
+            padding: 35px 20px;
+            border-radius: 14px;
+            font-size: 1.6em;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: #1e1e1e;
+            border: 3px solid #333;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .series-btn span { display: block; font-size: 0.5em; color: #aaa; margin-top: 8px; font-weight: normal; }
+        .bx:hover { border-color: #00a8ff; box-shadow: 0 0 25px rgba(0, 168, 255, 0.5); transform: translateY(-6px); }
+        .ux:hover { border-color: #ff7f00; box-shadow: 0 0 25px rgba(255, 127, 0, 0.5); transform: translateY(-6px); }
+        .cx:hover { border-color: #ff2a85; box-shadow: 0 0 25px rgba(255, 42, 133, 0.5); transform: translateY(-6px); }
+    </style>
+</head>
+<body>
+    <img src="static/logo.png" alt="Beyblade X Logo" class="logo">
+    <h1>CRBC 戰鬥陀螺 X 商品圖鑑</h1>
+    <p>請選擇要瀏覽的世代系列</p>
+    <div class="nav-cards">
+        <a href="pages/bx.html" class="series-btn bx">BX SERIES<span>基礎系列 (BX-01 ~ 11)</span></a>
+        <a href="pages/ux.html" class="series-btn ux">UX SERIES<span>獨特系列 (UX-01 ~ 11)</span></a>
+        <a href="pages/cx.html" class="series-btn cx">CX SERIES<span>客製系列 (CX-01 ~ 11)</span></a>
+    </div>
+</body>
+</html>

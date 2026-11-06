@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CX系列商品一覽 - Beyblade X</title>
+    
+    <!-- 連結 CSS -->
+    <link rel="stylesheet" href="../static/style4.cx.css">
+</head>
+<body>
+
+    <!-- ========================================= -->
+    <!-- 1. 導航與 Header -->
+    <!-- ========================================= -->
+    
+    <!-- 左上角回首頁按鈕 -->
+    <a href="/" class="home-btn">
+        <img src="../static/HOME.png" alt="回首頁" class="home-icon-img">
+    </a>
+
+    <!-- 頂部 Logo -->
+    <header>
+        <img src="../static/logo.png" alt="戰鬥陀螺 X Logo" class="logo">
+    </header>
+
+    <!-- ========================================= -->
+    <!-- 2. 中間主要內容區 (商品列表) -->
+    <!-- ========================================= -->
+    <div class="content-area">
+        
+        <div class="product-grid">
+            
+            <!-- 標題格 -->
+            <div class="product-card series-label-card scroll-fade">
+                <div class="series-label-text">
+                    CX<br>SERIES
+                </div>
+            </div>
+
+            <!-- 商品 1~11 -->
+            <div class="product-card scroll-fade">
+                <img src="../static/cx/cx01.png" alt="CX-01" class="prod-img">
+                <div class="prod-title"><span>CX-01 蒼龍勇氣</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/cx/cx02.png" alt="CX-02" class="prod-img">
+                <div class="prod-title"><span>CX-02 魔導至尊</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/cx/cx03.png" alt="CX-03" class="prod-img">
+                <div class="prod-title"><span>CX-03 英仙幽冥</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/cx/cx04.png" alt="CX-04" class="prod-img">
+                <div class="prod-title"><span>CX-04 極限衝擊對戰組</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/cx/cx05.png" alt="CX-05" class="prod-img">
+                <div class="prod-title"><span>CX-05 惡魔獵魂隨機強化組</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/cx/cx06.png" alt="CX-06" class="prod-img">
+                <div class="prod-title"><span>CX-06 極狐九尾隨機強化組</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/cx/cx07.png" alt="CX-07" class="prod-img">
+                <div class="prod-title"><span>CX-07 天馬爆擊</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/cx/cx08.png" alt="CX-08" class="prod-img">
+                <div class="prod-title"><span>CX-08 魔犬烈焰隨機強化組</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/cx/cx09.png" alt="CX-09" class="prod-img">
+                <div class="prod-title"><span>CX-09 焰神滅世</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/cx/cx10.png" alt="CX-10" class="prod-img">
+                <div class="prod-title"><span>CX-10 銀狼狩獵</span></div>
+            </div>
+
+            <div class="product-card scroll-fade">
+                <img src="../static/cx/cx11.png" alt="CX-11" class="prod-img">
+                <div class="prod-title"><span>CX-11 帝王威能</span></div>
+            </div>
+            
+            <!-- 最後一格 (敬請期待) -->
+            <div class="product-card scroll-fade coming-soon">
+                <div class="prod-title"><span>敬請期待</span></div>
+            </div>
+
+        </div>
+        
+        <!-- 底部留白 -->
+        <div style="height: 200px;"></div>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- 3. 前景元素 (人物) -->
+    <!-- ========================================= -->
+    <div class="char-scroll char-top">
+        <img src="../static/x.png" alt="Top Character">
+    </div>
+
+    <div class="char-scroll char-mid">
+        <img src="../static/Bird.png" alt="Mid Character">
+    </div>
+
+    <div class="char-scroll char-bot">
+        <img src="../static/Multi.png" alt="Bot Character">
+    </div>
+
+    <!-- ========================================= -->
+    <!-- 4. 背景裝飾 (Decorations) -->
+    <!-- ========================================= -->
+    <div class="left-sidebar"></div>
+
+    <div class="right-decoration">
+        <div class="r-stripe r-pink"></div>
+        <div class="r-stripe r-black"></div>
+        <div class="r-stripe r-pink"></div>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- 5. 滾動偵測腳本 -->
+    <!-- ========================================= -->
+<!-- ========================================= -->
+    <!-- 5. 滾動偵測腳本 (Scroll Trigger Script) -->
+    <!-- ========================================= */ -->
+    <script>
+        // 1. 建立一個「交叉觀察器 (IntersectionObserver)」
+        // 這是一個負責監控「元素是否進入視窗」的機器人
+        const observer = new IntersectionObserver((entries) => {
+            
+            // 遍歷每一個被觀察的目標 (可能是人物，也可能是商品卡片)
+            entries.forEach(entry => {
+                
+                // 檢查：如果該目標「正在交叉 (isIntersecting)」(也就是進入畫面範圍了)
+                if (entry.isIntersecting) {
+                    
+                    // 動作：幫該元素加上 "active" 這個 class
+                    // (加上 class 後，CSS 寫好的 transition/animation 就會開始執行)
+                    entry.target.classList.add('active');
+                    
+                    // 優化效能：既然動畫已經觸發了，就叫觀察員「停止觀察」這個元素
+                    // 這樣可以避免往回捲動時動畫重複閃爍，也能節省瀏覽器資源
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, {
+            // --- 觀察器的設定選項 ---
+            
+            // 觸發門檻 (Threshold)：0.01 代表只要目標露出 1% 的面積，就算「看到了」
+            threshold: 0.01,
+            
+            // 視窗邊界擴充 (Root Margin)：順序是「上、右、下、左」
+            // "0px 50% 10% 0px" 的意思是：
+            // 1. 往右邊多看 50% 的寬度 (這是為了抓到那些藏在右邊畫面外的人物)
+            // 2. 往下面多看 10% 的高度 (讓商品在還沒完全捲上來時，就提早一點點開始浮現，感覺更流暢)
+            rootMargin: "0px 50% 10% 0px"
+        });
+
+        // 2. 選取並觀察「人物」
+        // 抓取所有 class 有 'char-scroll' 的元素 (X, Bird, Multi)
+        const characters = document.querySelectorAll('.char-scroll');
+        // 對每一個抓到的人物，叫觀察員開始盯著它
+        characters.forEach(char => {
+            observer.observe(char);
+        });
+        
+        // 3. 選取並觀察「商品卡片」
+        // 抓取所有 class 有 'scroll-fade' 的元素 (BX/UX/CX 商品格)
+        const products = document.querySelectorAll('.scroll-fade');
+        // 對每一個抓到的商品，叫觀察員開始盯著它
+        products.forEach(prod => {
+            observer.observe(prod);
+        });
+    </script>
+
+</body>
+</html>

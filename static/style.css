@@ -1,0 +1,262 @@
+/* ========================================= */
+/* 1. 全域設定 (Global) - 設定網頁整體的基礎樣式 */
+/* ========================================= */
+body {
+    margin: 0;          /* 清除瀏覽器預設的邊距 (上下左右留白) */
+    padding: 0;         /* 清除瀏覽器預設的內距 */
+    font-family: "Microsoft JhengHei", Arial, sans-serif; /* 設定字體，優先使用微軟正黑體，若無則用 Arial */
+    background-color: #ffffff; /* 設定網頁背景顏色為純白色 */
+    overflow-x: hidden; /* 隱藏水平捲軸，防止因動畫物件從畫面外滑入時，出現不必要的左右捲動 */
+}
+
+/* ========================================= */
+/* 2. Header 與 Logo - 設定頂部區域和 Logo 圖片 */
+/* ========================================= */
+header {
+    width: 100%;        /* 設定寬度佔滿整個螢幕寬度 */
+    padding: 50px 0;    /* 設定內距：上下各留 50px，左右不留白 */
+    display: flex;      /* 使用 Flexbox 排版模式，方便內容置中 */
+    justify-content: center; /* 水平置中：讓 Logo 在畫面中間 */
+    align-items: center;     /* 垂直置中：讓 Logo 在 Header 區塊中間 */
+    position: relative; /* 設定相對定位，作為 z-index 的參考基準 */
+    z-index: 10;        /* 設定層級為 10，確保 Logo 顯示在背景裝飾之上 */
+}
+
+.logo {
+    max-width: 600px;   /* 限制 Logo 的最大寬度為 600px，避免圖片過大 */
+    width: 80%;         /* 設定寬度為父容器的 80%，實現響應式縮放 */
+    height: auto;       /* 高度設為自動，保持圖片原始長寬比例 */
+    animation: zoomInFade 1s ease-out; /* 套用名為 zoomInFade 的動畫，持續 1 秒，採緩出效果 */
+}
+
+/* ========================================= */
+/* 3. 主要選單 (Main Menu) - 首頁中間的 6 顆按鈕 */
+/* ========================================= */
+.main-menu-container {
+    display: grid;      /* 使用 Grid 網格排版模式 */
+    grid-template-columns: repeat(3, 1fr); /* 設定為 3 欄，每欄寬度均分 (1fr) */
+    gap: 15px;          /* 設定網格之間的間距為 15px */
+    
+    /* --- 定位與大小設定 --- */
+    width: 45%;         /* 設定容器總寬度為螢幕的 45% */
+    max-width: 600px;   /* 限制最大寬度不超過 600px */
+    
+    /* 設定外邊距 (Margin) 來控制位置 */
+    /* 上：50px */
+    /* 右：0 */
+    /* 下：50px */
+    /* 左：28% (這是為了避開左側的綠色三角形裝飾) */
+    margin: 50px 0 50px 28%; 
+    
+    position: relative; /* 設定相對定位 */
+    z-index: 20;        /* 設定層級為 20，確保按鈕在最上層，使用者可以點擊 */
+}
+
+/* 按鈕本體樣式 */
+.menu-btn {
+    display: block;     /* 設定為區塊元素，讓它獨佔空間並可設定寬高 */
+    background-color: #D0F685; /* 設定按鈕背景顏色為螢光綠 */
+    color: #000;        /* 設定文字顏色為黑色 */
+    
+    /* --- 文字設定 --- */
+    font-size: 1.2rem;  /* 設定字體大小為 1.2 倍根字體大小 */
+    font-weight: 900;   /* 設定字體粗細為最粗 (900) */
+    text-align: center; /* 讓文字在按鈕內水平置中 */
+    text-decoration: none; /* 去除超連結預設的底線 */
+    
+    /* --- 形狀設定 --- */
+    padding: 10px 0;    /* 設定內距：上下各 10px，左右 0 */
+    border-radius: 50px; /* 設定圓角半徑為 50px，讓按鈕變成膠囊狀 */
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2); /* 加入淡淡的黑色陰影增加立體感 */
+    
+    /* --- 動畫設定 --- */
+    transition: all 0.3s ease; /* 設定過渡效果：當樣式改變時 (如 hover)，花 0.3 秒平滑轉換 */
+    
+    /* 套用名為 floatUpFadeIn 的進場動畫，持續 0.6 秒，緩出效果 */
+    /* backwards: 讓動畫開始前元素就先套用 0% 的樣式 (也就是先隱藏) */
+    animation: floatUpFadeIn 0.6s ease-out backwards;
+}
+
+/* --- 按鈕依序浮現延遲 (Stagger Animation) --- */
+/* 設定每一顆按鈕比前一顆晚 0.1 秒開始動畫，製造波浪般的視覺效果 */
+.menu-btn:nth-child(1) { animation-delay: 0.1s; } /* 第 1 顆按鈕延遲 0.1 秒 */
+.menu-btn:nth-child(2) { animation-delay: 0.2s; } /* 第 2 顆按鈕延遲 0.2 秒 */
+.menu-btn:nth-child(3) { animation-delay: 0.3s; } /* 第 3 顆按鈕延遲 0.3 秒 */
+.menu-btn:nth-child(4) { animation-delay: 0.4s; } /* 第 4 顆按鈕延遲 0.4 秒 */
+.menu-btn:nth-child(5) { animation-delay: 0.5s; } /* 第 5 顆按鈕延遲 0.5 秒 */
+.menu-btn:nth-child(6) { animation-delay: 0.6s; } /* 第 6 顆按鈕延遲 0.6 秒 */
+
+/* --- 滑鼠懸停效果 (Hover) --- */
+.menu-btn:hover {
+    background-color: #bfff00; /* 滑鼠移上去時，顏色變亮一點 */
+    transform: translateY(-5px) scale(1.05); /* 按鈕往上浮起 5px，並且放大 1.05 倍 */
+    box-shadow: 0 10px 20px rgba(180, 255, 0, 0.6); /* 陰影加深並帶有綠色光暈 */
+}
+
+/* ========================================= */
+/* 4. 背景裝飾 (Decorations) - 左側三角形與右側斜線 */
+/* ========================================= */
+
+/* 左側綠色三角形 */
+.left-triangle-decoration {
+    position: fixed;    /* 設定固定定位，讓它隨捲軸滾動時保持在視窗固定位置 */
+    top: 0;             /* 貼齊視窗頂部 */
+    left: 0;            /* 貼齊視窗左側 */
+    width: 25%;         /* 設定寬度為螢幕的 25% */
+    height: 100%;       /* 設定高度佔滿整個螢幕 */
+    background-color: #C8F46E; /* 設定顏色為螢光綠 */
+    
+    /* 使用 clip-path 裁切出直角三角形形狀 */
+    /* polygon 座標順序：(左上, 右上, 左下) -> (0 0, 100% 100%, 0 100%) */
+    /* 這裡使用的是：左上(0 0), 右下(100% 100%), 左下(0 100%) */
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+    
+    z-index: 1;         /* 設定層級為 1，位於背景底層之上 */
+    transform: translateX(-100%); /* 初始狀態：往左平移 100% (藏在畫面左側外) */
+    animation: slideInFromLeft 0.8s ease-out forwards; /* 套用左側滑入動畫 */
+}
+
+/* 右側三色斜線容器 */
+.right-stripes-container {
+    position: fixed;    /* 設定固定定位 */
+    top: -20%;          /* 往上拉 20%，避免旋轉後上方出現空隙 */
+    right: 10%;         /* 距離右邊 10% 的位置 */
+    height: 150%;       /* 高度設為 150%，確保旋轉後長度足夠蓋住螢幕 */
+    display: flex;      /* 使用 Flexbox 讓內部的線條並排 */
+    
+    /* 設定初始變形：旋轉 18 度 + 往右平移 100% (藏在右側外) */
+    transform: rotate(18deg) translateX(100%); 
+    z-index: 0;         /* 設定層級為 0，位於最底層 */
+    
+    /* 套用右側滑入動畫，持續 0.8 秒，延遲 0.2 秒執行 */
+    animation: slideInFromRight 0.8s ease-out forwards 0.2s;
+}
+
+/* 斜線共通設定 */
+.stripe { 
+    height: 100%;       /* 線條高度佔滿容器 */
+}
+/* 綠色線設定 */
+.stripe-green { 
+    background-color: #D0F685; /* 顏色：螢光綠 */
+    width: 40px;        /* 寬度：40px */
+    flex-grow: 1;       /* Flex 比例：佔 1 份 */
+}
+/* 黑色線設定 */
+.stripe-black { 
+    background-color: #000000; /* 顏色：黑色 */
+    width: 40px;        /* 寬度：60px */
+    flex-grow: 1;     /* Flex 比例：佔 1 份 */
+}
+
+/* ========================================= */
+/* 5. 前景元素：陀螺與人物 */
+/* ========================================= */
+
+/* 左下角 - 紅色陀螺 (HellsScythe) */
+.HellsScythe {
+    position: fixed;    /* 固定定位 */
+    bottom: 3%;         /* 距離底部 3% */
+    left: 3%;           /* 距離左邊 3% */
+    z-index: 5;         /* 層級設為 5，位於背景裝飾之上 */
+    transform: translateX(-50px); /* 初始位置：往左偏 50px */
+    opacity: 0;         /* 初始透明度：0 (隱藏) */
+    /* 套用短距離左滑入動畫，延遲 0.5 秒執行 */
+    animation: slideInShortLeft 0.8s ease-out forwards 0.5s;
+}
+
+/* 左下角 - 藍色陀螺 (DranSword) */
+.DranSword {
+    position: fixed;    /* 固定定位 */
+    bottom: 3%;         /* 距離底部 3% */
+    left: 18%;          /* 距離左邊 18% (排在紅色陀螺右邊) */
+    z-index: 5;         /* 層級設為 5 */
+    transform: translateX(50px); /* 初始位置：往右偏 50px */
+    opacity: 0;         /* 初始透明度：0 */
+    /* 套用短距離右滑入動畫，延遲 0.5 秒執行 */
+    animation: slideInShortRight 0.8s ease-out forwards 0.5s;
+}
+
+/* 右下角 - 人物容器 */
+.character1-container {
+    position: fixed;    /* 固定定位 */
+    bottom: 0;          /* 貼齊底部 */
+    right: 0;           /* 貼齊右邊 */
+    z-index: 5;         /* 層級設為 5 */
+    transform: translateX(100%); /* 初始位置：往右平移 100% (藏在右側外) */
+    opacity: 0;
+    /* 套用人物滑入動畫，延遲 0.5 秒執行 */
+    animation: slideInFromRightCharacter 1s ease-out forwards 0.5s;
+}
+
+/* 陀螺圖片大小設定 */
+.bey-image {
+    width: 20vw;        /* 寬度設為視窗寬度的 20% */
+    max-width: 200px;   /* 最大寬度限制為 200px */
+    height: auto;       /* 高度自動 */
+    display: block;     /* 消除圖片下方空隙 */
+}
+
+/* 人物圖片大小設定 */
+.character-image {
+    max-height: 60vh;   /* 最大高度設為視窗高度的 60% */
+    width: auto;        /* 寬度自動調整 */
+    display: block;     /* 消除圖片下方空隙 */
+}
+
+/* ========================================= */
+/* 6. 動畫定義 (Keyframes) - 設定各種動畫的關鍵影格 */
+/* ========================================= */
+
+/* Logo 放大淡入動畫 */
+@keyframes zoomInFade {
+    0% { 
+        transform: scale(0.8) translateY(-30px); /* 開始：縮小 0.8 倍並向上偏 */
+        opacity: 0;     /* 透明 */
+    }
+    100% { 
+        transform: scale(1) translateY(0);       /* 結束：恢復原大小與位置 */
+        opacity: 1;     /* 不透明 */
+    }
+}
+
+/* 左側滑入動畫 (給綠色三角形用) */
+@keyframes slideInFromLeft {
+    to { transform: translateX(0); } /* 結束時回到 X 軸原點 */
+}
+
+/* 右側滑入動畫 (給斜線背景用，需保留旋轉角度) */
+@keyframes slideInFromRight {
+    /* 開始：保留旋轉 18 度，且位移到右側 100% */
+    from { transform: rotate(18deg) translateX(100%); }
+    /* 結束：保留旋轉 18 度，且位移回原點 */
+    to { transform: rotate(18deg) translateX(0); }
+}
+
+/* 右側2淡入動畫 (給人物用，單純移動) */
+@keyframes slideInFromRightCharacter {
+    to { transform: translateX(0);opacity: 1; } /* 結束時回到原點 */
+}
+
+/* 短距離左滑淡入動畫 (給紅色陀螺用) */
+@keyframes slideInShortLeft {
+    to { transform: translateX(0); opacity: 1; } /* 結束時回到原點並顯示 */
+}
+
+/* 短距離右滑淡入動畫 (給藍色陀螺用) */
+@keyframes slideInShortRight {
+    to { transform: translateX(0); opacity: 1; } /* 結束時回到原點並顯示 */
+}
+
+/* 按鈕向上浮現動畫 */
+@keyframes floatUpFadeIn {
+    from { 
+        opacity: 0;                 /* 開始：透明 */
+        transform: translateY(40px); /* 位置在下方 40px */
+    }
+    to { 
+        opacity: 1;                 /* 結束：不透明 */
+        transform: translateY(0);    /* 回到原位 */
+    }
+}
+

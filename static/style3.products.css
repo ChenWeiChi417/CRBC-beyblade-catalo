@@ -1,0 +1,256 @@
+/* ========================================= */
+/* 1. 全域設定 (Global) - 設定網頁整體的基礎樣式 */
+/* ========================================= */
+body {
+    margin: 0;          /* 清除瀏覽器預設的邊距 (上下左右留白)，讓內容貼齊視窗邊緣 */
+    padding: 0;         /* 清除瀏覽器預設的內距 */
+    font-family: "Microsoft JhengHei", Arial, sans-serif; /* 設定字體：優先使用微軟正黑體，若無則用 Arial */
+    background-color: #ffffff; /* 設定網頁背景顏色為純白色 */
+    overflow-x: hidden; /* 隱藏水平捲軸：防止因為裝飾或人物在進場動畫時超出畫面，導致下方出現捲軸 */
+}
+
+/* ========================================= */
+/* 2. Header 與 Logo - 設定頂部區域 */
+/* ========================================= */
+header {
+    width: 100%;        /* 設定寬度佔滿整個螢幕 */
+    padding: 30px 0;    /* 設定內距：上下各留 30px，左右不留 */
+    display: flex;      /* 使用 Flexbox 排版，方便內容置中 */
+    justify-content: center; /* 水平置中：讓 Logo 圖片在畫面正中間 */
+    align-items: center;     /* 垂直置中：讓 Logo 在 Header 區塊內垂直居中 */
+    position: relative; /* 設定相對定位，為了設定 z-index */
+    z-index: 10;        /* 設定層級為 10，確保 Logo 顯示在背景裝飾之上 */
+}
+
+.logo {
+    max-width: 500px;   /* 限制 Logo 的最大寬度為 500px，避免圖片過大 */
+    width: 60%;         /* 設定圖片寬度為父容器的 60%，實現響應式縮放 */
+    height: auto;       /* 高度設為自動，保持圖片原始長寬比例不變形 */
+    animation: zoomInFade 1s ease-out; /* 套用 zoomInFade 動畫，持續 1 秒，採緩出效果 */
+}
+
+/* ========================================= */
+/* 3. 導航按鈕 (Navigation) - 左上角回首頁按鈕 */
+/* ========================================= */
+
+/* 左上角回首頁按鈕本體 */
+.home-btn {
+    position: fixed;    /* 設定固定定位：捲動網頁時，按鈕一直停留在左上角 */
+    top: 0;             /* 貼齊視窗頂部 */
+    left: 5%;           /* 距離視窗左邊 5% 的位置 (稍微留點空隙) */
+    width: 80px;        /* 設定按鈕寬度為 80px */
+    height: 80px;       /* 設定按鈕高度為 80px */
+    background-color: #D0F685; /* 設定背景顏色為螢光綠 */
+    
+    /* 【關鍵技術】使用 clip-path 裁切出「倒三角形」 */
+    /* polygon 座標順序：(左上 0 0), (右上 100% 0), (下中 50% 100%) */
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    
+    display: flex;      /* 使用 Flexbox 排版 */
+    justify-content: center; /* 讓裡面的房子圖示水平置中 */
+    padding-top: 12px;  /* 設定上方內距 12px，把圖示往下推一點，讓它在三角形內視覺居中 */
+    z-index: 100;       /* 設定極高的層級 (100)，確保按鈕永遠在最上層可點擊 */
+    text-decoration: none; /* 去除超連結預設的底線 */
+    
+    transition: transform 0.3s ease; /* 設定過渡效果：當變形 (如 hover) 發生時，花 0.3 秒平滑轉換 */
+    animation: dropDown 1s ease-out; /* 套用掉落動畫：讓按鈕一開始從上面掉下來 */
+}
+
+/* 當滑鼠移到按鈕上時的效果 */
+.home-btn:hover {
+    transform: scale(1.1); /* 按鈕放大 1.1 倍，增加互動感 */
+}
+
+/* 房子圖示圖片設定 */
+.home-icon-img {
+    width: 35px;        /* 設定圖示寬度 35px */
+    height: 35px;       /* 設定圖示高度 35px */
+    display: block;     /* 消除圖片下方的預設空隙 */
+}
+
+/* ========================================= */
+/* 4. 商品系列選單 (Product Menu) - BX/UX/CX 按鈕 */
+/* ========================================= */
+
+.product-menu-container {
+    display: flex;      /* 使用 Flexbox 排版，讓三個按鈕並排 */
+    justify-content: center; /* 讓按鈕群組在畫面中水平置中 */
+    gap: 30px;          /* 設定按鈕之間的間距為 30px */
+    
+    /* 定位設定：避開右邊的斜線裝飾 */
+    margin-top: 100px;  /* 與上方 Logo 距離 100px */
+    padding-right: 10%; /* 右邊留白 10%，讓視覺重心稍微往左偏 */
+    
+    position: relative; /* 相對定位 */
+    z-index: 20;        /* 層級設為 20，確保按鈕在最上層 */
+}
+
+/* 系列按鈕通用樣式 (BX, UX, CX 都用這個) */
+.prod-btn {
+    display: block;     /* 區塊元素，可設定寬高 */
+    width: 200px;       /* 按鈕寬度固定 200px */
+    padding: 15px 0;    /* 上下內距 15px */
+    text-align: center; /* 文字置中 */
+    text-decoration: none; /* 去除底線 */
+    
+    /* 字體設定 */
+    color: #fff;        /* 文字顏色：白色 */
+    font-size: 2rem;    /* 字體大小：2倍根字體大小 (很大) */
+    font-weight: 900;   /* 字體粗細：極粗 */
+    font-style: italic; /* 字體樣式：斜體 */
+    
+    /* 形狀與特效 */
+    transform: skewX(-20deg); /* 【關鍵】X 軸傾斜 -20 度，製作平行四邊形 */
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.2); /* 設定陰影 */
+    
+    /* 動畫設定 */
+    transition: transform 0.3s ease; /* 設定 Hover 時變形過渡時間 */
+    
+    /* 套用浮現動畫：floatUpFadeIn，0.8秒，緩出效果，backwards 代表開始前先隱藏 */
+    animation: floatUpFadeIn 0.8s ease-out backwards;
+}
+
+/* 按鈕文字轉正 (因為父元素傾斜了，子元素要反向傾斜回來) */
+.prod-btn span {
+    display: block;     /* 區塊顯示 */
+    transform: skewX(20deg); /* 反向傾斜 20 度，讓文字變正 */
+}
+
+/* 個別系列顏色設定 */
+.btn-bx { background-color: #7EC0EE; } /* BX 系列：天藍色 */
+.btn-ux { background-color: #E68A2E; } /* UX 系列：橘色 */
+.btn-cx { background-color: #D9007E; } /* CX 系列：桃紅色 */
+
+/* 依序浮現延遲 (Stagger Delay) - 製造波浪效果 */
+.product-menu-container .prod-btn:nth-child(1) { animation-delay: 0.2s; } /* 第 1 顆延遲 0.2 秒 */
+.product-menu-container .prod-btn:nth-child(2) { animation-delay: 0.4s; } /* 第 2 顆延遲 0.4 秒 */
+.product-menu-container .prod-btn:nth-child(3) { animation-delay: 0.6s; } /* 第 3 顆延遲 0.6 秒 */
+
+/* 按鈕滑鼠懸停效果 (Hover) */
+.prod-btn:hover {
+    /* 保持傾斜 (-20deg)，同時放大 (1.1倍) 並上浮 (-5px) */
+    transform: skewX(-20deg) scale(1.1) translateY(-5px);
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.3); /* 陰影加深變大 */
+}
+
+/* ========================================= */
+/* 5. 背景裝飾 (Decorations) - 左三角與右斜線 */
+/* ========================================= */
+
+/* 左側綠色三角形 */
+.left-triangle-decoration {
+    position: fixed;    /* 固定定位 */
+    top: 0;             /* 貼齊頂部 */
+    left: 0;            /* 貼齊左邊 */
+    width: 25%;         /* 寬度 25% */
+    height: 100%;       /* 高度 100% */
+    background-color: #C8F46E; /* 螢光綠 */
+    
+    /* 裁切成直角三角形 */
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+    z-index: 1;         /* 層級 1 */
+    
+    transform: translateX(-100%); /* 初始位置：藏在左邊外面 */
+    animation: slideInFromLeft 0.8s ease-out forwards; /* 左滑入動畫 */
+}
+
+/* 右側三色斜線容器 */
+.right-stripes-container {
+    position: fixed;    /* 固定定位 */
+    top: -20%;          /* 往上拉 20% */
+    right: 15%;         /* 距離右邊 15% */
+    height: 150%;       /* 高度 150% (確保旋轉後夠長) */
+    display: flex;      /* Flexbox 排版 */
+    
+    transform: rotate(20deg); /* 旋轉 20 度 */
+    z-index: 0;         /* 層級 0 (最底層) */
+    
+    translate: 100% 0;  /* 初始位置：藏在右邊外面 (使用 translate 屬性) */
+    animation: slideInFromRight 0.8s ease-out forwards 0.2s; /* 右滑入動畫，延遲 0.2 秒 */
+}
+
+/* 斜線設定 */
+.stripe { height: 100%; } /* 高度佔滿 */
+.stripe-green { background-color: #D0F685; width: 40px; flex-grow: 1; } /* 綠色線 */
+.stripe-black { background-color: #000000; width: 60px; flex-grow: 1.5; } /* 黑色線 (較寬) */
+
+/* ========================================= */
+/* 6. 前景元素 (Foreground) - 人物與陀螺 */
+/* ========================================= */
+
+/* 右下角人物容器 */
+.character-container {
+    position: fixed;    /* 固定定位 */
+    bottom: 0;          /* 貼齊底部 */
+    right: 0;           /* 貼齊右邊 */
+    z-index: 5;         /* 層級 5 */
+    
+    translate: 100% 0;  /* 初始位置：藏在右邊外面 */
+    animation: slideInFromRightCharacter 1s ease-out forwards 0.5s; /* 人物滑入動畫，延遲 0.5 秒 */
+}
+
+/* 人物圖片設定 */
+.character-image {
+    max-height: 60vh;   /* 最大高度佔螢幕 60% */
+    width: auto;        /* 寬度自動 */
+    display: block;     /* 消除空隙 */
+}
+
+/* 左下角陀螺容器 */
+.bey-container {
+    position: fixed;    /* 固定定位 */
+    bottom: 5%;         /* 距離底部 5% */
+    left: 5%;           /* 距離左邊 5% */
+    z-index: 10;        /* 層級 10 */
+    display: flex;      /* 讓兩顆陀螺並排 */
+    gap: 20px;          /* 兩顆陀螺間距 20px */
+}
+
+/* 陀螺圖片設定 */
+.bey-small {
+    width: 150px;       /* 寬度固定 150px */
+    animation: zoomInFade 1s ease-out 1s backwards; /* 放大淡入動畫，延遲 1 秒 */
+}
+
+/* ========================================= */
+/* 7. 動畫定義 (Keyframes) - 動畫劇本 */
+/* ========================================= */
+
+/* Logo 與陀螺的放大淡入動畫 */
+@keyframes zoomInFade {
+    0% { transform: scale(0.8) translateY(-30px); opacity: 0; } /* 開始：縮小、上移、透明 */
+    100% { transform: scale(1) translateY(0); opacity: 1; }     /* 結束：正常 */
+}
+
+/* 左側滑入動畫 */
+@keyframes slideInFromLeft {
+    to { transform: translateX(0); } /* 回到原點 */
+}
+
+/* 右側滑入動畫 (給斜線用，使用 translate) */
+@keyframes slideInFromRight {
+    to { translate: 0 0; } /* 回到原點 */
+}
+
+/* 右側滑入動畫 (給人物用，使用 translate) */
+@keyframes slideInFromRightCharacter {
+    to { translate: 0 0; } /* 回到原點 */
+}
+
+/* 按鈕從天而降動畫 */
+@keyframes dropDown {
+    0% { transform: translateY(-100%); } /* 開始：在上方外面 */
+    100% { transform: translateY(0); }   /* 結束：回到原位 */
+}
+
+/* 按鈕往上浮現動畫 (需包含 skewX 以保持平行四邊形形狀) */
+@keyframes floatUpFadeIn {
+    from {
+        opacity: 0;                 /* 開始：透明 */
+        transform: skewX(-20deg) translateY(50px); /* 保持傾斜，並位於下方 50px */
+    }
+    to {
+        opacity: 1;                 /* 結束：不透明 */
+        transform: skewX(-20deg) translateY(0);    /* 回到原位 */
+    }
+}
